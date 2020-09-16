@@ -1,0 +1,9 @@
+{
+  "realm": "vraio-client",
+  "auth-server-url": "http://192.168.29.72:8180/auth/",
+  "ssl-required": "external",
+  "resource": "client-1",
+  "public-client": true,
+  "confidential-port": 0,
+  "clientId": "client-1"
+}

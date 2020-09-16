@@ -1,28 +1,23 @@
-import React, { Component } from "react";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { BrowserRouter, Route } from "react-router-dom";
+import Banner from "./Banner";
 import Welcome from "./Welcome";
-import Secured from "./Secured";
-import "./App.css";
+import Secured, { SecuredTwo } from "./Secured";
+import "./App.scss";
 
-class App extends Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <div className="container">
-          <h1 style={{ textAlign: "center" }}>Client 1</h1>
-          <ul>
-            <li>
-              <Link to="/">public component</Link>
-            </li>
-            <li>
-              <Link to="/secured">secured component</Link>
-            </li>
-          </ul>
-          <Route exact path="/" component={Welcome} />
-          <Route path="/secured" component={Secured} />
-        </div>
-      </BrowserRouter>
-    );
-  }
-}
+const App = () => {
+  const [keycloak, setKeycloak] = useState(null);
+  return (
+    <BrowserRouter>
+      <Banner keycloak={keycloak} />
+      <div className="container-fluid">
+        <Route exact path="/" component={Welcome} />
+        <Route path="/secured">
+          {/* <SecuredTwo /> */}
+          <Secured setKeycloak={setKeycloak} />
+        </Route>
+      </div>
+    </BrowserRouter>
+  );
+};
 export default App;

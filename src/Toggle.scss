@@ -1,0 +1,101 @@
+$switchColor: #558b2f;
+$offSwitchColor: #424242;
+$backGroundColor: #ddd;
+$sliderSize: 40px;
+$paddingSpace: 5px;
+
+@mixin switchTransform($size) {
+  -webkit-transform: translateX($size);
+  -ms-transform: translateX($size);
+  transform: translateX($size);
+  background-color: $switchColor;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: calc(
+    #{$sliderSize} + #{$sliderSize} + #{$paddingSpace} + #{$paddingSpace}
+  );
+  height: 50px;
+  & > input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    &:checked {
+      & + {
+        & .slider {
+          color: #fff;
+          & > .sliderBefore {
+            @include switchTransform($sliderSize);
+          }
+          //   &::before {
+          //     @include switchTransform(26px);
+          //   }
+        }
+      }
+    }
+    &:focus {
+      & + {
+        & .slider {
+          box-shadow: 0 0 1px $switchColor;
+        }
+      }
+    }
+  }
+  & > .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 3px;
+    background-color: $backGroundColor;
+    & > .sliderBefore {
+      position: absolute;
+      min-height: $sliderSize;
+      min-width: $sliderSize;
+      left: $paddingSpace;
+      bottom: $paddingSpace;
+      background-color: $offSwitchColor;
+      color: #fff;
+      -webkit-transition: 0.4s;
+      transition: 0.4s;
+      border-radius: 3px;
+      padding: 8px $paddingSpace;
+    }
+    /*
+    &::before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: 0.4s;
+      transition: 0.4s;
+    }
+    */
+    &.round {
+      border-radius: 34px;
+      & > .sliderBefore {
+        border-radius: 50%;
+      }
+      /*
+      &::before {
+        border-radius: 50%;
+      }
+      */
+    }
+  }
+  &.disabled {
+    opacity: 0.4;
+    &:hover {
+      cursor: crosshair !important;
+    }
+  }
+}
